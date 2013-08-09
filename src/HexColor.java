@@ -1,11 +1,17 @@
 /*
+ * Image Manipulation
+ * 	HexColor Class
+ * 
+ * @author: Samuel Acuna
+ * @date: 07/2013
  * 
  * HexColor is a class that creates a hexadecimal color object 
  * that allows the client to perform mathematical operations 
  * with the hexadecimal value of the color to find color patterns, 
- * similarities, differences, contrasts, and compliments.  
+ * similarities, differences, contrasts, and compliments.    
  * 
  */
+
 import java.awt.Color; 
 
 public class HexColor {
@@ -16,6 +22,11 @@ public class HexColor {
 	private int[] rgb; 
 	private Color color; 
 
+	// Creates a new hexadecimal color object based on the 
+	// 	string representation given 
+	// @pre: none
+	// @post: instantiate HexColor object
+	// @param: str is of length 3 or 6 
 	public HexColor(String str) {
 		if (!(str.length()==3 || str.length()==6)) throw new IllegalArgumentException("Make sure your "+
 				"hexadecimal color contains 3 or 6 characters. ");  
@@ -31,6 +42,10 @@ public class HexColor {
 		this.color = new Color(this.rgb[0],this.rgb[1],this.rgb[2]); 
 	}
 	
+	// Returns the decimal representation of this hexadecimal color
+	// @pre: this object has been instantiated
+	// @post: int base ten representing value base 16
+	// @param: none || hexadecimal color string representation
 	private int getDecimal() { return getDecimal(this.hexa); } 
 	private int getDecimal(String str) {
 		int v = 0; 
@@ -54,11 +69,25 @@ public class HexColor {
 		return v; 
 	}
 	
+	// Returns the result of the difference in decimal 
+	// 	form 
+	// @pre: this object has been instantiated
+	// @post: this decimal value - hex2 decimal value
+	// @param: hex2 is of type HexColor 
 	public int minusDecimal(HexColor hex2) {
 		System.out.println("total: "+(this.decimal - hex2.decimal)); 
 		return this.decimal - hex2.decimal; 
 	}
 	
+	// Returns the result of the difference in hexadecimal 
+	// 	numbers in rgb format 
+	// @pre: this object has been instantiated
+	// @post: array of length 3 that contains hexadecimal 
+	// 	values for red, green, and blue colors respectively
+	// 	as rgb format 
+	// @param: hex2 is of type HexColor, tolerance determines
+	// 	how similar, equals, and/or different are the 
+	// 	colors being compared. 
 	public int[] minusRGB(HexColor hex2, int tolerance) {
 		if(tolerance < 0) tolerance = 0; 
 		this.threshold = (tolerance>255) ? 255 : tolerance;  
@@ -76,7 +105,12 @@ public class HexColor {
 		
 		return result; 
 	}
-	
+
+	// Returns the string of the object that is being 
+	// 	printed
+	// @pre: this object has been instantiated
+	// @post: string representation of object
+	// @param: none 
 	public String toString() {
 		return "#"+this.hexa+", b10: "+decimal+", rgb("+this.rgb[0]+","+this.rgb[1]+","+this.rgb[2]+")"; 
 	}
