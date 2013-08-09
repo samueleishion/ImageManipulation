@@ -14,8 +14,8 @@
 
 import java.awt.Color; 
 
-public class HexColor {
-	private static final char[] DIGITS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
+public class HexColor { 
+	
 	private int threshold; 
 	private String hexa; 
 	private int decimal; 
@@ -57,8 +57,8 @@ public class HexColor {
 			boolean flag = true;
 			int j = 0; 
 			while(flag) {
-				if(j >= DIGITS.length) flag = false; 
-				if(c==DIGITS[j]) { 
+				if(j >= Constants.DIGITS.length) flag = false; 
+				if(c==Constants.DIGITS[j]) { 
 					v += (j!=0) ? j+(j*(15*k)) : j;   
 					flag = false; 
 				}

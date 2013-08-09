@@ -11,8 +11,7 @@
  * 
  */
 
-public class Hexadecimal {
-	private static final char[] DIGITS = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};   
+public class Hexadecimal { 	
 	
 	private int value; 
 	private String number; 
@@ -45,8 +44,8 @@ public class Hexadecimal {
 			boolean flag = true;
 			int j = 0; 
 			while(flag) {
-				if(j >= DIGITS.length) flag = false; 
-				if(c==DIGITS[j]) { 
+				if(j >= Constants.DIGITS.length) flag = false; 
+				if(c==Constants.DIGITS[j]) { 
 					v += (j!=0) ? j+(j*(15*k)) : j;   
 					flag = false; 
 				}
