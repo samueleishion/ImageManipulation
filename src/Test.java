@@ -7,6 +7,7 @@
  * 		#ff0000 vs #ff3333 vs #ff4d4d 
  */
 
+import java.awt.Point; 
 
 public class Test {
 
@@ -25,6 +26,11 @@ public class Test {
 		System.out.println(hex2); 
 
 		hex.minusRGB(hex2, TOLERANCE);  
+		
+		Point p = new Point(2,4); 
+		Shape s = new Shape(p); 
+		p = new Point(3,8); 
+		s.addBoundary(p); 
 		
 //		Hexadecimal hex = new Hexadecimal();
 //		System.out.println(hex); 
