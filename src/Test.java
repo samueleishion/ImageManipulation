@@ -5,7 +5,7 @@ public class Test {
 	 * @param args
 	 */
 	
-	private static int TOLERANCE = 51;
+	private static int TOLERANCE = 15;
 	
 	public static void main(String[] args) {
 		Hexadecimal hex = new Hexadecimal("ff"); 
@@ -20,6 +20,15 @@ public class Test {
 		} catch(IllegalArgumentException e) {
 			System.out.println(e); 
 		}
+		
+		System.out.println("\n");
+		
+		HexColor hc = new HexColor("9e0b0f"); 
+		HexColor hc2 = new HexColor("ee1c24"); 
+		System.out.println(hc.getColor()); 
+		System.out.println(hc2.getColor()); 
+		if(hc.isSimilar(hc2,TOLERANCE)) System.out.println("Similar colors"); 
+		else System.out.println("Different colors"); 
 	}
 
 }

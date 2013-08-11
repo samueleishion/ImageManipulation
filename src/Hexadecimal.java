@@ -3,11 +3,10 @@
  * 	Hexadecimal Class
  * 
  * @author: Samuel Acuna
- * @date: 07/2013
+ * @date: 08/2013
  * 
  * Representation of hexadecimal number that is able to 
- * perform some mathematical operations both hexa-decimally 
- * and decimally.  
+ * perform some mathematical operations. 
  * 
  */
 
@@ -28,7 +27,8 @@ public class Hexadecimal {
 	}
 	
 	public Hexadecimal(int num) {
-		if(num<0) throw new IllegalArgumentException("Hexadecimals cannot be negative. "); 
+//		if(num<0) throw new IllegalArgumentException("Hexadecimals cannot be negative. ");
+		if(num<0) num = 0; 
 		this.decnum = num; 
 		this.hexnum = decToHex(num);
 	}
@@ -37,21 +37,17 @@ public class Hexadecimal {
 		int num = 0; 
 		int k = 0;
 		char ch; 
+//		System.out.println(str+" ===="); 
 		for(int i = str.length()-1; i>=0; i--) {
-			ch = str.charAt(i); 
+			ch = str.charAt(str.length()-(i+1)); 
 			if(!Character.isDigit(ch)) ch = Character.toLowerCase(ch); 
-			boolean flag = true; 
-			int j = 0; 
-			while(flag) {
-				if(j>=Constants.DIGITS.length) flag = false;
-				else {
-					if(ch==Constants.DIGITS[j]) {
-						num += (j!=0) ? j+(j*(15*k)) : j; 
-					}
+			for(int j = 0; j < Constants.DIGITS.length; j++) {
+				if(Constants.DIGITS[j]==ch) {
+					k=j;
+					break; 
 				}
-				j++; 
-			}
-			k++; 
+			} 
+			num += k*(Math.pow(16, i)); 
 		}
 		return num; 
 	}
@@ -74,7 +70,9 @@ public class Hexadecimal {
 		return new Hexadecimal(this.decnum+hex.getDecimal()); 
 	}
 	public Hexadecimal minus(Hexadecimal hex) {
-		return new Hexadecimal(this.decnum-hex.getDecimal()); 
+		if(this.decnum>hex.getDecimal())
+			return new Hexadecimal(this.decnum-hex.getDecimal()); 
+		return new Hexadecimal(hex.getDecimal()-this.decnum); 
 	}
 	
 	public String toString() {
