@@ -13,125 +13,71 @@
 
 public class Hexadecimal { 	
 	
-	private int value; 
-	private String number; 
-	private int[] rgb; 
+	private int decnum; 
+	private String hexnum; 
 	
-	// Creates a new blank hexadecimal number object
-	// @pre: none
-	// @post: instantiates empty number
-	// @param: none
 	public Hexadecimal() {
-		this.value = 0; 
-		this.number = "0";  
-		this.rgb = new int[3]; 
+		this.decnum= 0; 
+		this.hexnum = "0"; 
 		System.out.println(this); 
 	}
 	
-	// Creates a new hexadecimal number object based on 
-	// the string representation given 
-	// @pre: none
-	// @post: instantiate object
-	// @param: str is a string representation of 
-	// 		a hexadecimal number
 	public Hexadecimal(String str) { 
-		int v = 0; 
-		int k = 0; 
-		char c; 
-		for(int i = str.length()-1; i >= 0; i--) {
-			c = str.charAt(i); 
-			if(!Character.isDigit(c)) c = Character.toLowerCase(c);
-			boolean flag = true;
+		this.hexnum = str; 
+		this.decnum = hexToDec(str); 
+	}
+	
+	public Hexadecimal(int num) {
+		if(num<0) throw new IllegalArgumentException("Hexadecimals cannot be negative. "); 
+		this.decnum = num; 
+		this.hexnum = decToHex(num);
+	}
+	
+	private int hexToDec(String str) {
+		int num = 0; 
+		int k = 0;
+		char ch; 
+		for(int i = str.length()-1; i>=0; i--) {
+			ch = str.charAt(i); 
+			if(!Character.isDigit(ch)) ch = Character.toLowerCase(ch); 
+			boolean flag = true; 
 			int j = 0; 
 			while(flag) {
-				if(j >= Constants.DIGITS.length) flag = false; 
-				if(c==Constants.DIGITS[j]) { 
-					v += (j!=0) ? j+(j*(15*k)) : j;   
-					flag = false; 
+				if(j>=Constants.DIGITS.length) flag = false;
+				else {
+					if(ch==Constants.DIGITS[j]) {
+						num += (j!=0) ? j+(j*(15*k)) : j; 
+					}
 				}
 				j++; 
 			}
 			k++; 
-		}		
-
-		this.rgb = new int[3]; 
-		this.value = v;  
-		this.number = str; 
-//		if(this.number.length()==3 || this.number.length()==6) setRGB(); 
-		System.out.println(this); 
-	}
-	
-	//	Sets the representation of the color in rgb(R,G,B) format
-	//	@pre: this object has been instantiated
-	//	@post: sets the rgb value for this object
-	//	@param: none 
-	private void setRGB() {
-		String r,g,b;  
-		if(this.number.length()==3) {
-			r = this.number.charAt(0) + "" + this.number.charAt(0);
-			g = this.number.charAt(1) + "" + this.number.charAt(1);
-			b = this.number.charAt(2) + "" + this.number.charAt(2);
-		} else if(this.number.length()==6) {
-			r = this.number.charAt(0) + "" + this.number.charAt(1);
-			g = this.number.charAt(2) + "" + this.number.charAt(3);
-			b = this.number.charAt(4) + "" + this.number.charAt(5);
-		} else {
-			r = "00";
-			g = "00";
-			b = "00"; 
 		}
-		
-		this.rgb[0] = new Hexadecimal(r).value(); 
-		this.rgb[1] = new Hexadecimal(g).value(); 
-		this.rgb[2] = new Hexadecimal(b).value(); 
+		return num; 
+	}
+	private String decToHex(int num) {
+		String hex = "";  
+		int temp = num%16; 
+		if(num-temp==0) hex += Constants.DIGITS[temp]; 
+		else hex += decToHex((num-temp)/16)+Constants.DIGITS[temp]; 
+		return hex; 
 	}
 	
-	// Returns the decimal value of this hexadecimal number
-	// @pre: this object has been instantiated
-	// @post: returns the value of this object
-	// @param: none 
-	public int value() {
-		return this.value; 
+	public int getDecimal() {
+		return this.decnum; 
+	}
+	public String getHexadecimal() {
+		return this.hexnum; 
 	}
 	
-	// Returns the hexadecimal representation of the number 
-	// 	as a string
-	// @pre: this object has been instantiated
-	// @post: returns the number of this object 
-	// @param: none 
-	public String number() {
-		return this.number; 
+	public Hexadecimal plus(Hexadecimal hex) {
+		return new Hexadecimal(this.decnum+hex.getDecimal()); 
+	}
+	public Hexadecimal minus(Hexadecimal hex) {
+		return new Hexadecimal(this.decnum-hex.getDecimal()); 
 	}
 	
-	// Returns the difference between the value of this
-	// 	hexadecimal object and another one
-	// @pre: this object has been instantiated
-	// @post: returns difference between this-hex2
-	// @param: hex2 is object of type Hexadecimal
-	public int minus(Hexadecimal hex2) {
-		return this.value()-hex2.value(); 
-	}
-	
-	// TODO 
-	public int minusRGB(Hexadecimal hex2) {
-		return 0; 
-	}
-	
-	// Returns a string representation of the 
-	// 	rgb format of this number
-	// @pre: this object has been instantiated
-	// @post: returns r,g,b string
-	// @param: none 
-	public String rgb() {
-		return this.rgb[0]+", "+this.rgb[1]+", "+this.rgb[2];  
-	}
-	
-	// Returns the string of the object that is being 
-	// 	printed
-	// @pre: this object has been instantiated
-	// @post: string representation of object
-	// @param: none 
 	public String toString() {
-		return "number: "+this.number()+", value: "+this.value()+"\n"+this.rgb(); 
+		return this.decnum+" => #"+this.hexnum; 
 	}
 }
