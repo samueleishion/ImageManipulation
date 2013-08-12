@@ -39,4 +39,8 @@ public class Image {
 	public String getImageName() { return this.path; }
 	public BufferedImage getImage() { return this.img; }
 	public HexColor[][] getColors() { return this.colors; }
+	
+	public String toString() { 
+		return getImageName(); 
+	} 
 }

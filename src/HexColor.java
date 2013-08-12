@@ -47,6 +47,7 @@ public class HexColor {
 					"list contains 3 values (rgb)"); 
 		this.clear(); 
 		this.rgbdec = rgbDecimal; 
+		System.out.println("colors: "+rgbdec[0]+','+rgbdec[1]+','+rgbdec[2]);  
 		this.rgbhex[0] = new Hexadecimal(this.rgbdec[0]);
 		this.rgbhex[1] = new Hexadecimal(this.rgbdec[1]); 
 		this.rgbhex[2] = new Hexadecimal(this.rgbdec[2]); 
@@ -83,7 +84,7 @@ public class HexColor {
 		dred = this.getRed().minus(hex.getRed()).getDecimal(); 
 		dgrn = this.getGreen().minus(hex.getGreen()).getDecimal(); 
 		dblu = this.getBlue().minus(hex.getBlue()).getDecimal();
-		System.out.println(dred+"+"+dgrn+"+"+dblu+"="+((dred+dgrn+dblu)/3)); 
+//		System.out.println(dred+"+"+dgrn+"+"+dblu+"="+((dred+dgrn+dblu)/3)); 
 		return ((dred+dgrn+dblu)/3) <= treshold; 
 	}
 	

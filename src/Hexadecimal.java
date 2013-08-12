@@ -19,25 +19,25 @@ public class Hexadecimal {
 		this.decnum= 0; 
 		this.hexnum = "0"; 
 		System.out.println(this); 
-	}
+	} 
 	
 	public Hexadecimal(String str) { 
 		this.hexnum = str; 
-		this.decnum = hexToDec(str); 
-	}
+		this.decnum = hexToDec(str);  
+	} 
 	
-	public Hexadecimal(int num) {
-//		if(num<0) throw new IllegalArgumentException("Hexadecimals cannot be negative. ");
+	public Hexadecimal(int num) { 
+//		if(num<0) throw new IllegalArgumentException("Hexadecimals cannot be negative. "); 
 		if(num<0) num = 0; 
 		this.decnum = num; 
-		this.hexnum = decToHex(num);
-	}
+		this.hexnum = decToHex(num); 
+	} 
 	
-	private int hexToDec(String str) {
+	private int hexToDec(String str) { 
 		int num = 0; 
-		int k = 0;
+		int k = 0; 
 		char ch; 
-//		System.out.println(str+" ===="); 
+//		System.out.println(str+" ====");  
 		for(int i = str.length()-1; i>=0; i--) {
 			ch = str.charAt(str.length()-(i+1)); 
 			if(!Character.isDigit(ch)) ch = Character.toLowerCase(ch); 
@@ -51,13 +51,25 @@ public class Hexadecimal {
 		}
 		return num; 
 	}
+	
 	private String decToHex(int num) {
-		String hex = "";  
-		int temp = num%16; 
-		if(num-temp==0) hex += Constants.DIGITS[temp]; 
-		else hex += decToHex((num-temp)/16)+Constants.DIGITS[temp]; 
+		String hex = ""; 
+		int result = num;
+		int remainder; 
+		while(result>0) { 
+			remainder = result%16;  
+			result = result/16; 
+			hex += Constants.DIGITS[remainder]; 
+		}
 		return hex; 
 	}
+//	private String decToHex(int num) {
+//		String hex = "";  
+//		int temp = num%16; 
+//		if(num-temp==0) hex += Constants.DIGITS[temp]; 
+//		else hex += decToHex((num-temp)/16)+Constants.DIGITS[temp]; 
+//		return hex; 
+//	}
 	
 	public int getDecimal() {
 		return this.decnum; 

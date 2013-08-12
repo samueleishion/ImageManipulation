@@ -10,6 +10,7 @@ public class Test {
 	private static int TOLERANCE = 15;
 	
 	public static void main(String[] args) {
+//		System.out.println(java.lang.Runtime.getRuntime().maxMemory()); 
 		System.out.println("HEXADECIMAL"); 
 		System.out.println("-----------"); 
 		Hexadecimal hex = new Hexadecimal("ff"); 
@@ -38,8 +39,15 @@ public class Test {
 		System.out.println("\nIMAGE"); 
 		System.out.println("-----"); 
 
-		String uri = System.getProperty("user.dir")+File.separator+"iphone.png";
-		Image img = new Image(uri);  
+		String path = System.getProperty("user.dir")+File.separator; 
+		String uri = path+"iphone.png";
+		Image img = new Image(uri); 
+		System.out.println(img); 
+		System.out.println("=+=+=+=+=+=+=+=+=+"); 
+		
+		uri = path+"kant.jpg"; 
+		img = new Image(uri); 
+		System.out.println(img); 
 	}
 
 }
