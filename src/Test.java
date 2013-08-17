@@ -1,5 +1,5 @@
+import java.awt.Point;
 import java.io.File;
-
 
 public class Test {
 
@@ -40,14 +40,18 @@ public class Test {
 		System.out.println("-----"); 
 
 		String path = System.getProperty("user.dir")+File.separator; 
-		String uri = path+"iphone.png";
+		String uri = path+"img1.png";
 		Image img = new Image(uri); 
 		System.out.println(img); 
 		System.out.println("=+=+=+=+=+=+=+=+=+"); 
 		
-		uri = path+"kant.jpg"; 
+		uri = path+"img2.png"; 
 		img = new Image(uri); 
 		System.out.println(img); 
+		
+		Shape shape = new Shape();
+		shape.addPixel(new Point(0,0)); 
+		shape.addColor(new HexColor("fff")); 
 	}
 
 }

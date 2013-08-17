@@ -89,6 +89,7 @@ public class HexColor {
 	}
 	
 	public String toString() {
-		return rgbhex[0]+","+rgbhex[1]+","+rgbhex[2]; 
+//		return rgbhex[0]+","+rgbhex[1]+","+rgbhex[2];
+		return rgbhex[0]+""+rgbhex[1]+""+rgbhex[2]; 
 	}
 }
