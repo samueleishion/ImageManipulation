@@ -68,26 +68,28 @@ public class Image {
 			for(int j = 0; j < this.colors[i].length; j++) {
 				if(!this.imgGrid[i][j]) {
 					shape = new Shape(); 
-					this.getSimilar(i,j,shape); 
+					this.getSimilar(i,j,shape,this.colors[i][j]); 
 					this.shapes.add(shape); 
 				}
 			}
 		}
 	}
 	
-	private void getSimilar(int i, int j, Shape shape) {
+	private void getSimilar(int i, int j, Shape shape, HexColor originalColor) {
 		if(isInbound(i,j) && !this.imgGrid[i][j]) {
 			this.imgGrid[i][j] = true; 
-			shape.addPixel(new Point(i,j)); 
-			shape.addColor(this.colors[i][j]); 
-			getSimilar(i,j-1,shape); 
-			getSimilar(i,j+1,shape); 
-			getSimilar(i-1,j-1,shape); 
-			getSimilar(i-1,j,shape); 
-			getSimilar(i-1,j+1,shape); 
-			getSimilar(i+1,j-1,shape); 
-			getSimilar(i+1,j,shape); 
-			getSimilar(i+1,j+1,shape); 
+			if(originalColor.isSimilar(this.colors[i][j], Constants.TOLERANCE)) {
+				shape.addPixel(new Point(i,j)); 
+				shape.addColor(this.colors[i][j]); 
+				getSimilar(i,j-1,shape,originalColor); 
+				getSimilar(i,j+1,shape,originalColor); 
+				getSimilar(i-1,j-1,shape,originalColor); 
+				getSimilar(i-1,j,shape,originalColor); 
+				getSimilar(i-1,j+1,shape,originalColor); 
+				getSimilar(i+1,j-1,shape,originalColor); 
+				getSimilar(i+1,j,shape,originalColor); 
+				getSimilar(i+1,j+1,shape,originalColor);
+			}
 		}
 	}
 	
