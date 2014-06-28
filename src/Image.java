@@ -38,7 +38,7 @@ public class Image {
 			this.height = this.img.getHeight(); 
 			this.processColors(); 
 			this.processShape(); 
-			this.printMatrix(); 
+			//this.printMatrix(); 
 		} catch(Exception e) {
 			e.printStackTrace(); 
 		}
@@ -73,6 +73,10 @@ public class Image {
 				}
 			}
 		}
+	}
+	
+	public int getShapeCount() {
+		return this.shapes.size(); 
 	}
 	
 	private void getSimilar(int i, int j, Shape shape, HexColor originalColor) {

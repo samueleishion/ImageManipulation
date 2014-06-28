@@ -8,50 +8,67 @@ public class Test {
 	 */
 	
 	private static int TOLERANCE = 15;
+	private static int total = 0; 
+	private static int passed = 0; 
 	
 	public static void main(String[] args) {
-//		System.out.println(java.lang.Runtime.getRuntime().maxMemory()); 
-		System.out.println("HEXADECIMAL"); 
-		System.out.println("-----------"); 
-		Hexadecimal hex = new Hexadecimal("ff"); 
-		System.out.println(hex);  
-		Hexadecimal hex2 = new Hexadecimal("1"); 
-		System.out.println(hex2); 
-		System.out.println(hex.plus(hex2)); 
-		System.out.println(hex.minus(hex2)); 
-		System.out.println(hex2.plus(hex)); 
-		try{ 
-			System.out.println(hex2.minus(hex)); 
-		} catch(IllegalArgumentException e) {
-			System.out.println(e); 
-		}
 		
-		System.out.println("\nHEXCOLOR");
-		System.out.println("--------"); 
-		
-		HexColor hc = new HexColor("9e0b0f"); 
-		HexColor hc2 = new HexColor("ee1c24"); 
-		System.out.println(hc.getColor()); 
-		System.out.println(hc2.getColor()); 
-		if(hc.isSimilar(hc2,TOLERANCE)) System.out.println("Similar colors"); 
-		else System.out.println("Different colors"); 
-		
-		System.out.println("\nIMAGE"); 
-		System.out.println("-----"); 
+		// ###############
+		// # HEXADECIMAL
+		// ############### 
 
+		// getDecimal 
+		Hexadecimal hex = new Hexadecimal("01"); 
+		int actual = 1; 
+		int result = hex.getDecimal(); 
+		evalResult(actual==result, "PASSED", "FAILED: "+actual+"!="+result); 
+		
+		// getHexadecimal 
+		hex = new Hexadecimal(255); 
+		String actual_string = "ff";
+		String result_string = hex.getHexadecimal(); 
+		evalResult(actual_string.equals(result_string), "PASSED", "FAILED: "+actual_string+"!="+result_string); 
+		
+		// plus 
+		Hexadecimal hex2 = new Hexadecimal("0a");
+		hex = new Hexadecimal("0a"); 
+		actual = 20; 
+		result = hex.plus(hex2).getDecimal(); 
+		evalResult(actual==result, "PASSED", "FAILED: "+actual+"!="+result); 
+		
+		// minus 
+		hex = new Hexadecimal("ff"); 
+		hex2 = new Hexadecimal("0a"); 
+		actual = 245; 
+		result = hex.minus(hex2).getDecimal(); 
+		evalResult(actual==result, "PASSED", "FAILED: "+actual+"!="+result); 
+
+		// ###############
+		// # IMAGE 
+		// ###############
 		String path = System.getProperty("user.dir")+File.separator; 
-		String uri = path+"img1.png";
+		String uri = path+"img1.png"; 
 		Image img = new Image(uri); 
-		System.out.println(img); 
-		System.out.println("=+=+=+=+=+=+=+=+=+"); 
+		actual = 2; 
+		result = img.getShapeCount(); 
+		evalResult(actual==result, "PASSED", "FAILED"); 
 		
-		uri = path+"img2.png"; 
-		img = new Image(uri); 
-		System.out.println(img); 
+		showResult(); 
+	}
+	
+	public static void evalResult(Boolean test, String pass, String fail) { 
+		total++; 
 		
-		Shape shape = new Shape();
-		shape.addPixel(new Point(0,0)); 
-		shape.addColor(new HexColor("fff")); 
+		if(test) {
+			System.out.println(total+" "+pass);
+			passed++; 
+		} else System.out.println(total+" "+fail); 
+		
+	}
+	
+	public static void showResult() {
+		System.out.println(); 
+		System.out.println("Total: "+passed+"/"+total+" "+((passed/total)*100)+"%"); 
 	}
 
 }

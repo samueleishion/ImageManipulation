@@ -47,7 +47,7 @@ public class HexColor {
 					"list contains 3 values (rgb)"); 
 		this.clear(); 
 		this.rgbdec = rgbDecimal; 
-		System.out.println("colors: "+rgbdec[0]+','+rgbdec[1]+','+rgbdec[2]);  
+		//System.out.println("colors: "+rgbdec[0]+','+rgbdec[1]+','+rgbdec[2]);  
 		this.rgbhex[0] = new Hexadecimal(this.rgbdec[0]);
 		this.rgbhex[1] = new Hexadecimal(this.rgbdec[1]); 
 		this.rgbhex[2] = new Hexadecimal(this.rgbdec[2]); 
